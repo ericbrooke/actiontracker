@@ -1,10 +1,13 @@
 require 'spec_helper'
 
 feature 'Creating Projects' do
-	scenario "can create a project" do
-		visit '/'
+	
+	before (:each) do
+	  visit '/'
+    click_link 'New Project'
+	end
 
-		click_link 'New Project'
+	scenario "can create a project" do
 
 		fill_in 'Name', with: 'actiontracker'
 		fill_in 'Description', with: 'an app to track your projects'
@@ -19,5 +22,12 @@ feature 'Creating Projects' do
 		title = "actiontracker - Projects - actiontracker"
 		expect(page).to have_title(title)
 	end
+  
+  scenario "can not create a project wthout a name" do
 
+    click_button 'Create Project'
+
+    expect(page).to have_content("Project has not been created.")
+    expect(page).to have_content("Name can't be blank")
+  end
 end
