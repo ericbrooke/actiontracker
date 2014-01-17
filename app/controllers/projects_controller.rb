@@ -39,8 +39,18 @@ class ProjectsController < ApplicationController
       flash[:notice] = "Project has not been updated."
       render "edit"
     end
+   end
 
+  def destroy
+    @project =Project.find(params[:id])
+
+    @project.destroy
+    flash[:notice] = "Project has been destroyed."
+
+    redirect_to projects_path
   end
+
+  
 
 private
 
