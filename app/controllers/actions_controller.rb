@@ -21,9 +21,9 @@ before_action :set_project
 private
 
   def action_params
-  	params.require(:action).permit(:title, :description)
+  	params.require(:foo).permit(:title, :description)
   end
-  
+
   def set_project
   	@project = Project.find(params[:project_id])
   end
