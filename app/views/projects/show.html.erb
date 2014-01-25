@@ -10,3 +10,12 @@
       data: { confirm: "You sure?"} %>
 
 <%= link_to "New Action", new_project_action_path(@project) %>
+
+<ul id='actions'>
+  <% @project.actions.each do |action| %>
+  <li>
+    # <%= action.id %> -
+    <%= link_to action.title, [@project, action] %>
+   </li>
+   <% end %>
+ </ul>
