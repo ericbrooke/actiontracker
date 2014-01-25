@@ -1,6 +1,7 @@
 class ActionsController < ApplicationController
 
 before_action :set_project
+before_action :set_action, only: [:show, :edit, :update, :destroy]
 
 	def new
 		@action = @project.actions.build
@@ -26,6 +27,10 @@ private
 
   def set_project
   	@project = Project.find(params[:project_id])
+  end
+
+  def set_action
+  	@action = @project.actions.find(params[:id])
   end
 
 end

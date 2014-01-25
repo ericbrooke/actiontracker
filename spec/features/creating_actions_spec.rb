@@ -15,7 +15,7 @@ feature "Creating Actions" do
 		fill_in "Description", with: "loads of test in this box"
 		click_button "Create Action"
 
-		expect(page).to have_content("Action has being created.")
+		expect(page).to have_content("Action has been created.")
 	end
 
 	scenario "Creating an action with nothing filled in" do
@@ -26,4 +26,14 @@ feature "Creating Actions" do
 		expect(page).to have_content("Title can't be blank")
 		expect(page).to have_content("Description can't be blank")
 	end
+
+	scenario "Description must be longer than 10 characters" do
+    fill_in "Title", with: "Non-standards compliance"
+    fill_in "Description", with: "it sucks"
+    click_button "Create Action"
+
+    expect(page).to have_content("Action has not been created.")
+    expect(page).to have_content("Description is too short")
+  end
+
 end
