@@ -17,6 +17,19 @@ before_action :set_action, only: [:show, :edit, :update, :destroy]
 			render "new"
 		end
 	end
+  
+  def edit
+  end
+
+  def update
+  	if @action.update(action_params)
+  		flash[:notice] ="Action has been updated."
+  		redirect_to [@project, @action]
+  	else
+  		flash[:alert] = "Action has not been updated."
+  		render "edit"
+  	end
+  end
 
 
 private
