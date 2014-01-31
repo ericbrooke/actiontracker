@@ -31,6 +31,13 @@ before_action :set_action, only: [:show, :edit, :update, :destroy]
   	end
   end
 
+  def destroy
+  	@action.destroy
+  	flash[:notice] = "Action has been deleted."
+  	redirect_to @project
+  end
+
+
 
 private
 
