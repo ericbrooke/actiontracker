@@ -44,7 +44,7 @@ before_action :require_signin!, except: [:show, :index]
 private
 
   def action_params
-  	params.require(:foo).permit(:title, :description)
+  	params.require(:action).permit(:title, :description)
   end
 
   def set_project
