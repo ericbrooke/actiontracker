@@ -2,9 +2,11 @@ class ActionsController < ApplicationController
 
 before_action :set_project
 before_action :set_action, only: [:show, :edit, :update, :destroy]
+before_action :require_signin!, except: [:show, :index]
 
 	def new
-		@action = @project.actions.build
+		@action = @project.actions.build(action_params)
+    @action.user = current_user
 	end
 
 	def create

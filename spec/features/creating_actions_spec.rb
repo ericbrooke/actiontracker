@@ -3,19 +3,33 @@ require 'spec_helper'
 feature "Creating Actions" do
 
 	before do
-		FactoryGirl.create(:project, name: "test name")
+	  project = FactoryGirl.create(:project)
+    user = FactoryGirl.create(:user)
+  
+    visit '/'
+    click_link project.name
+    click_link "New Action"
+    message = "You need to sign in or sign up before continuing."
+    expect(page).to have_content(message)
 
-		visit "/"
-		click_link "test name"
-		click_link "New Action"
-	end
+    fill_in "Name", with: user.name
+    fill_in "Password", with: user.password
+    click_button "Sign in"
 
+    click_link project.name
+    click_link "New Action"
+  end
+  
 	scenario "Creating an action" do
 		fill_in "Title", with: "Really important!"
 		fill_in "Description", with: "loads of test in this box"
 		click_button "Create Action"
 
 		expect(page).to have_content("Action has been created.")
+
+		within '#action #author' do
+			expect(page).to have_content("Created by sample@example.com")
+		end
 	end
 
 	scenario "Creating an action with nothing filled in" do
