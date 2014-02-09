@@ -1,6 +1,7 @@
 <div id='action'>
   <h2><%= @action.title %></h2>
-  <span id='author'>Created by <%= @action.user.email</span>
+  
+  <span id='author'>Created by <%= @action.user.email %></span>
   <%= link_to "Edit Action", [:edit, @project, @action] %>
   <%= link_to "Delete Action", [@project, @action], method: :delete,
   data: { confirm: "Are you sure you want to delete this action?"} %>

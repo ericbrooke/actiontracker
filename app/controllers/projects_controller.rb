@@ -17,45 +17,28 @@ class ProjectsController < ApplicationController
   	  flash[:notice] = "Project has been created."
   	  redirect_to @project
     else
-  	  flash[:notice] = "Project has not been created."
+  	  flash[:alert] = "Project has not been created."
       render "new"
     end
   end
 
-  def show
-  #note before action
-  end
-
-  def edit
-  #note before action  
-  end
-
   def update
-  #note before action
     if @project.update(project_params)
-
       flash[:notice] = "Project has been updated."
       redirect_to @project
     else
-      flash[:notice] = "Project has not been updated."
+      flash[:alert] = "Project has not been updated."
       render "edit"
     end
    end
 
   def destroy
-  #note before action
     @project.destroy
     flash[:notice] = "Project has been destroyed."
     redirect_to projects_path
   end
 
-  
-
 private
-
-  def project_params
-    params.require(:project).permit(:name, :description)
-  end
 
  def set_project
    @project = Project.find(params[:id])
@@ -63,5 +46,9 @@ private
   flash[:alert] = "The project you were looking for could not be found."
   redirect_to projects_path
  end
+
+  def project_params
+    params.require(:project).permit(:name, :description)
+  end
 
 end

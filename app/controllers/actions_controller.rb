@@ -5,12 +5,13 @@ before_action :set_action, only: [:show, :edit, :update, :destroy]
 before_action :require_signin!, except: [:show, :index]
 
 	def new
-		@action = @project.actions.build(action_params)
-    @action.user = current_user
+		@action = @project.actions.build
 	end
 
 	def create
 		@action = @project.actions.build(action_params)
+    @action.user = current_user
+
 		if @action.save
 			flash[:notice] = "Action has been created."
 			redirect_to [@project, @action]
@@ -44,7 +45,7 @@ before_action :require_signin!, except: [:show, :index]
 private
 
   def action_params
-  	params.require(:action).permit(:title, :description)
+  	params.require(:foo).permit(:title, :description)
   end
 
   def set_project
