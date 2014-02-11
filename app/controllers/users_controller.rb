@@ -14,7 +14,6 @@ class UsersController < ApplicationController
   	else
   		render :new
   	end
-
   end
 
   def show
@@ -30,8 +29,8 @@ class UsersController < ApplicationController
   	else
   		flash[:alert] = "Profile has not been updated."
   		render "edit"
+    end
   end
-end
 
 
   private
