@@ -2,13 +2,15 @@ require 'spec_helper'
 
 feature "Viewing actions" do
 	before do
-		sublime = FactoryGirl.create(:project, name: "sublime")
+		user = FactoryGirl.create(:user)
 
-		FactoryGirl.create(:action, project: sublime, title: "Finish version 3", description: "yes actually")
+		sublime = FactoryGirl.create(:project, name: "sublime")
+		action = FactoryGirl.create(:action, project: sublime, title: "Finish version 3", description: "yes actually")
+		action.update(user: user)
 
 		chrome = FactoryGirl.create(:project, name: "chrome")
-
-		FactoryGirl.create(:action, project: chrome, title: "stop being a processor hog", description: "and fix pepperflash")
+		action = FactoryGirl.create(:action, project: chrome, title: "stop being a processor hog", description: "and fix pepperflash")
+		action.update(user: user)
 
 		visit "/"
 	end
