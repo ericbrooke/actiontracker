@@ -2,12 +2,13 @@
 
 <h2><%= @project.name %></h2>
 
-<%= link_to "Edit Project", edit_project_path(@project) %>
-
-<%= link_to "Delete Project", 
-      project_path(@project), 
-      method: :delete, 
-      data: { confirm: "You sure?"} %>
+<% admins_only do %>
+	<%= link_to "Edit Project", edit_project_path(@project) %>
+	<%= link_to "Delete Project", 
+	      project_path(@project), 
+	      method: :delete, 
+	      data: { confirm: "You sure?"} %>
+<% end %>
 
 <%= link_to "New Action", new_project_action_path(@project) %>
 
