@@ -5,6 +5,7 @@ feature "Creating Actions" do
 	before do
 	  project = FactoryGirl.create(:project)
     user = FactoryGirl.create(:user)
+    @email = user.email
   
     visit '/'
     click_link project.name
@@ -28,7 +29,7 @@ feature "Creating Actions" do
 		expect(page).to have_content("Action has been created.")
 
 		within '#action #author' do
-			expect(page).to have_content("Created by sample@example.com")
+			expect(page).to have_content("Created by #{@email}")
 		end
 	end
 

@@ -5,6 +5,6 @@ class User < ActiveRecord::Base
 	  "#{email} (#{admin? ? "Admin" : "User"})"
 	end
 
-	#validates :email, presence: true
+	validates :email, presence: true
 
 end
