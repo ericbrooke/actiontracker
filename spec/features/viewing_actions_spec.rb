@@ -7,11 +7,14 @@ feature "Viewing actions" do
 		sublime = FactoryGirl.create(:project, name: "sublime")
 		action = FactoryGirl.create(:action, project: sublime, title: "Finish version 3", description: "yes actually")
 		action.update(user: user)
+		define_permission!(user, "view", sublime)
 
 		chrome = FactoryGirl.create(:project, name: "chrome")
 		action = FactoryGirl.create(:action, project: chrome, title: "stop being a processor hog", description: "and fix pepperflash")
 		action.update(user: user)
+		define_permission!(user, "view", chrome)
 
+		sign_in_as!(user)
 		visit "/"
 	end
 
