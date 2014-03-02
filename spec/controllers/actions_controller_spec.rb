@@ -17,5 +17,28 @@ describe ActionsController do
       expect(flash[:alert]).to eql("The project you were looking " +
                                    "for could not be found.")
     end
+
+	  context "with permission to view the project" do
+		  before do
+		    sign_in(user)
+		    define_permission!(user, "view", project)
+		  end
+
+		  def cannot_create_actions!
+		    response.should redirect_to(project)
+		    message = "You cannot create actions on this project."
+		    flash[:alert].should eql(message)
+		  end
+
+		  it "cannot begin to create a action" do
+		    get :new, project_id: project.id
+		    cannot_create_actions!
+		  end
+
+		  it "cannot create a action without permission" do
+		    post :create, project_id: project.id
+		    cannot_create_actions!
+		  end
+		end
   end
 end

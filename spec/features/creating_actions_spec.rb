@@ -6,6 +6,7 @@ feature "Creating Actions" do
 	  project = FactoryGirl.create(:project)
     user = FactoryGirl.create(:user)
 		define_permission!(user, "view", project)
+		define_permission!(user,"create actions", project)
 		@email = user.email
 		sign_in_as!(user)
       
