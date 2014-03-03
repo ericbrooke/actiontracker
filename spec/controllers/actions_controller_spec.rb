@@ -30,6 +30,26 @@ describe ActionsController do
 		    flash[:alert].should eql(message)
 		  end
 
+			def cannot_update_actions!
+			  expect(response).to redirect_to(project)
+			  expect(flash[:alert]).to eql("You cannot edit actions " \
+			                               "on this project.")
+			end
+
+			it "cannot edit a action without permission" do
+			  get :edit, { project_id: project.id, id: action.id }
+			  cannot_update_actions!
+			end
+
+			it "cannot update a action without permission" do
+			  put :update, { project_id: project.id,
+			                 id: action.id,
+			                 action: {}
+			               }
+			  cannot_update_actions!
+			end
+
+
 		  it "cannot begin to create a action" do
 		    get :new, project_id: project.id
 		    cannot_create_actions!

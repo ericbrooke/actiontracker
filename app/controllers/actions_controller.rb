@@ -4,6 +4,7 @@ before_action :require_signin!
 before_action :set_project
 before_action :set_action, only: [:show, :edit, :update, :destroy]
 before_action :authorize_create!, only: [:new,:create]
+before_action :authorize_update!, only: [:edit, :update]
 
 	def new
 		@action = @project.actions.build
@@ -46,7 +47,7 @@ before_action :authorize_create!, only: [:new,:create]
 private
 
   def action_params
-	params.require(:foo).permit(:title, :description)
+	 params.require(:foo).permit(:title, :description)
   end
 
   def set_project
@@ -68,5 +69,11 @@ private
     end
   end
 
+  def authorize_update!
+    if !current_user.admin? && cannot?("edit actions".to_sym, @project)
+      flash[:alert] = "You cannot edit actions on this project."
+      redirect_to @project
+    end
+  end
 
 end
