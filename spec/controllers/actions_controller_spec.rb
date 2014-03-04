@@ -49,6 +49,14 @@ describe ActionsController do
 			  cannot_update_actions!
 			end
 
+			it "cannot delete a action without permission" do
+			  delete :destroy, { project_id: project.id, id: action.id }
+
+			  expect(response).to redirect_to(project)
+			  message = "You cannot delete actions from this project."
+			  expect(flash[:alert]).to eql(message)
+			end
+
 
 		  it "cannot begin to create a action" do
 		    get :new, project_id: project.id

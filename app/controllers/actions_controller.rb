@@ -5,6 +5,7 @@ before_action :set_project
 before_action :set_action, only: [:show, :edit, :update, :destroy]
 before_action :authorize_create!, only: [:new,:create]
 before_action :authorize_update!, only: [:edit, :update]
+before_action :authorize_delete!, only: :destroy
 
 	def new
 		@action = @project.actions.build
@@ -72,6 +73,13 @@ private
   def authorize_update!
     if !current_user.admin? && cannot?("edit actions".to_sym, @project)
       flash[:alert] = "You cannot edit actions on this project."
+      redirect_to @project
+    end
+  end
+
+  def authorize_delete!
+    if !current_user.admin? && cannot?(:"delete actions", @project)
+      flash[:alert] = "You cannot delete actions from this project."
       redirect_to @project
     end
   end
