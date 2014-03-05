@@ -10,7 +10,9 @@
 	      data: { confirm: "You sure?"} %>
 <% end %>
 
-<%= link_to "New Action", new_project_action_path(@project) %>
+<% authorized?(:"create actions", @project) do %>
+  <%= link_to "New Action", new_project_action_path(@project) %>
+<% end %>
 
 <ul id='actions'>
   <% @project.actions.each do |action| %>

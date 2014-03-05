@@ -39,6 +39,19 @@ feature "hidden links" do
 			visit project_path(project)
 			assert_no_link_for "Delete Project"
 		end
+
+		scenario "New action link is shown to a user with permission" do
+		  define_permission!(user, "view", project)
+		  define_permission!(user, "create actions", project)
+		  visit project_path(project)
+		  assert_link_for "New Action"
+		end
+
+		scenario "New action link is hidden from a user without permission" do
+		  define_permission!(user, "view", project)
+		  visit project_path(project)
+		  assert_no_link_for "New Action"
+		end
 	end
 
 	context "admin users" do
@@ -57,6 +70,11 @@ feature "hidden links" do
 			visit project_path(project)
 			assert_link_for "Delete Project"
 		end
-	end
+
+		scenario "New action link is shown to admins" do
+		  visit project_path(project)
+		  assert_link_for "New Action"
+		end
+end
 	
 end
