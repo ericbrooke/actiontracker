@@ -4,6 +4,8 @@ feature "hidden links" do
 	let(:user) { FactoryGirl.create(:user) }
 	let(:admin) { FactoryGirl.create(:admin_user ) }
 	let(:project) { FactoryGirl.create(:project) }
+	let(:action) { FactoryGirl.create(:action, project: project,
+                                           user: user) }
 
 	context "anonymous users" do
 		scenario "cannot see the New Project link" do
@@ -52,6 +54,23 @@ feature "hidden links" do
 		  visit project_path(project)
 		  assert_no_link_for "New Action"
 		end
+
+		scenario "Edit action link is shown to a user with permission" do
+		  action 
+		  define_permission!(user, "view", project)
+		  define_permission!(user, "edit actions", project)
+		  visit project_path(project)
+		  click_link action.title
+		  assert_link_for "Edit Action"
+		end
+
+		scenario "Edit action link is hidden from a user without permission" do
+		  action
+		  define_permission!(user, "view", project)
+		  visit project_path(project)
+		  click_link action.title
+		  assert_no_link_for "Edit Action"
+		end
 	end
 
 	context "admin users" do
@@ -75,6 +94,14 @@ feature "hidden links" do
 		  visit project_path(project)
 		  assert_link_for "New Action"
 		end
+
+		scenario "Edit action link is shown to admins" do
+		  action
+		  visit project_path(project)
+		  click_link action.title
+		  assert_link_for "Edit Action"
+		end
+
 end
 	
 end
