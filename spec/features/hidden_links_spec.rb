@@ -37,7 +37,7 @@ feature "hidden links" do
 			assert_no_link_for "Edit Project"
 		end
 
-		scenario "cannor see the Delete Project link" do
+		scenario "cannot see the Delete Project link" do
 			visit project_path(project)
 			assert_no_link_for "Delete Project"
 		end
@@ -71,6 +71,25 @@ feature "hidden links" do
 		  click_link action.title
 		  assert_no_link_for "Edit Action"
 		end
+
+		scenario "Delete action link is shown to a user with permission" do
+		  action
+		  define_permission!(user, "view", project)
+		  define_permission!(user, "delete actions", project)
+		  visit project_path(project)
+		  click_link action.title
+		  assert_link_for "Delete Action"
+		end
+
+		scenario "Delete action link is hidden from users without permission" do
+		  action
+		  define_permission!(user, "view", project)
+		  visit project_path(project)
+		  click_link action.title
+		  assert_no_link_for "Delete Action"
+		end
+
+
 	end
 
 	context "admin users" do
@@ -101,6 +120,13 @@ feature "hidden links" do
 		  click_link action.title
 		  assert_link_for "Edit Action"
 		end
+
+	scenario "Delete action link is shown to admins" do
+	  action
+	  visit project_path(project)
+	  click_link action.title
+	  assert_link_for "Delete Action"
+	end
 
 end
 	
