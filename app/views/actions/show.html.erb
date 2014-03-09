@@ -12,4 +12,18 @@
 	  data: { confirm: "Are you sure you want to delete this action?"} %>
 	<% end %>
 	<%= simple_format(@action.description) %>
+  <div id="author">Created by <%= @action.user.email %></div>
+
+  <% if @action.asset.present? %>
+    <h3>Attached File</h3>
+    <div class="asset">
+      <p>
+        <%= link_to File.basename(@action.asset.path),
+                     @action.asset.url %>
+      </p>
+      <p><small><%= number_to_human_size(@action.asset.size) %>
+       </small></p>
+    </div>
+  <% end %>
+
 </div>

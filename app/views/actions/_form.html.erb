@@ -1,4 +1,4 @@
-<%= form_for [@project, @action], as: :foo do |f| %>
+<%= form_for [@project, @action], html: {multipart: true }, as: :foo do |f| %>
 	<% if @action.errors.any? %>
 	<div id="error_explanation" >
 	  <h2><%= pluralize(@action.errors.count, "error") %>
@@ -20,6 +20,10 @@
   <p>
     <%= f.label :description %><br>
     <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :asset, "File" %><br>
+    <%= f.file_field :asset %>
   </p>
   <%= f.submit %>
 <% end %>

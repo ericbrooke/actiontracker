@@ -48,7 +48,7 @@ before_action :authorize_delete!, only: :destroy
 private
 
   def action_params
-	 params.require(:foo).permit(:title, :description)
+	 params.require(:foo).permit(:title, :description, :asset)
   end
 
   def set_project
