@@ -12,15 +12,16 @@
 	<%= simple_format(@action.description) %>
   <div id="author">Created by <%= @action.user.email %></div>
 
-  <% if @action.asset.present? %>
-    <h3>Attached File</h3>
-    <div class="asset">
+  <% if @action.assets.present? %>
+    <h3>Attached Files</h3>
+    <div class="assets">
+    <% @action.assets.each do |asset| %>
       <p>
-        <%= link_to File.basename(@action.asset.path),
-                     @action.asset.url %>
+        <%= link_to File.basename(asset.asset.path), asset.asset.url %>
       </p>
-      <p><small><%= number_to_human_size(@action.asset.size) %>
+      <p><small><%= number_to_human_size(asset.asset.size) %>
        </small></p>
+    <% end %>
     </div>
   <% end %>
 
