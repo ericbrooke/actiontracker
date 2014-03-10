@@ -1,8 +1,6 @@
 <div id='action'>
   <h2><%= @action.title %></h2>
-  
-  <span id='author'>Created by <%= @action.user.email %></span>
-  
+    
   <% authorized?("edit actions", @project) do %>
     <%= link_to "Edit Action", [:edit, @project, @action] %>
   <% end %>
