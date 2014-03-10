@@ -9,6 +9,7 @@ before_action :authorize_delete!, only: :destroy
 
 	def new
 		@action = @project.actions.build
+    3.times { @action.assets.build }
 	end
 
 	def create
@@ -48,7 +49,7 @@ before_action :authorize_delete!, only: :destroy
 private
 
   def action_params
-	 params.require(:foo).permit(:title, :description, :asset)
+	 params.require(:foo).permit(:title, :description, assets_attributes: [:asset])
   end
 
   def set_project
