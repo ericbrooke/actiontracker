@@ -47,7 +47,6 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'cancan', '~> 1.6.10'
 gem 'carrierwave', '~> 0.9.0'
 
-
 group :test, :development do
 	gem 'rspec-rails', '~> 2.14'
 end
@@ -55,5 +54,7 @@ end
 group :test do
 	gem 'capybara', "2.1.0"
 	gem 'factory_girl_rails', '4.2.1'
+	gem 'database_cleaner', '~> 1.0.1'
+	gem 'selenium-webdriver'
 end
 

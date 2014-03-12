@@ -9,7 +9,7 @@ before_action :authorize_delete!, only: :destroy
 
 	def new
 		@action = @project.actions.build
-    3.times { @action.assets.build }
+    @action.assets.build
 	end
 
 	def create
