@@ -5,8 +5,7 @@ class FilesController < ApplicationController
 		@action = Action.new
 		asset = @action.assets.build
 
-	  render partial: "files/form",
-	         locals: { number: params[:number].to_i }
+		render partial: "files/form", locals: { number: params[:number].to_i, asset: asset }
 	end
 
   def show
