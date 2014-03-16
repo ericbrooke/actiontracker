@@ -1,8 +1,9 @@
 class Asset < ActiveRecord::Base
+	
 	mount_uploader :asset, AssetUploader
+	belongs_to :action
 
 	before_save :update_content_type
-	belongs_to :action
 
 	private
 

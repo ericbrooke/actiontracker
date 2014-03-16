@@ -17,8 +17,7 @@ class AssetUploader < CarrierWave::Uploader::Base
   # end
 
   def store_dir
-    Rails.root + "uploads/#{model.class.to_s.underscore}/" + \
-                 "#{mounted_as}/#{model.id}"
+    Rails.root + "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
