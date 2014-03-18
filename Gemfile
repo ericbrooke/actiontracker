@@ -21,9 +21,6 @@ gem 'coffee-rails', '~> 4.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-# gem 'turbolinks'
-
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
@@ -33,7 +30,7 @@ group :doc do
 end
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -44,17 +41,17 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'cancan', '~> 1.6.10'
-gem 'carrierwave', '~> 0.9.0'
-
 group :test, :development do
-	gem 'rspec-rails', '~> 2.14'
+  gem 'rspec-rails', '~> 2.14'
 end
 
 group :test do
-	gem 'capybara', "2.1.0"
-	gem 'factory_girl_rails', '4.2.1'
-	gem 'database_cleaner', '~> 1.0.1'
-	gem 'selenium-webdriver'
+  gem "capybara", "2.1.0"
+  gem 'factory_girl_rails', '~> 4.2.1'
+  gem 'selenium-webdriver', '~> 2.35.1'
+  gem 'database_cleaner', '~> 1.0.1'
 end
+
+gem 'cancan', "~> 1.6.10"
+gem 'carrierwave', '~> 0.9.0'
 

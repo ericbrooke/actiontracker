@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20140311035837) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "asset"
   end
 
   add_index "actions", ["project_id"], name: "index_actions_on_project_id"
