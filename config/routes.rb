@@ -1,28 +1,28 @@
 Actiontracker::Application.routes.draw do
 
-
   root "projects#index"
-  get "/signin", to: "sessions#new"
-  post "/signin", to: "sessions#create"
-  delete "/signout", to: "sessions#destroy", as: "signout"
-
   
   resources :projects do
     resources :actions
   end
 
   resources :users
-  resources :files
 
   namespace :admin do
-    root :to => "base#index"
+    root "base#index"
     resources :users do
       resources :permissions
-
       put "permissions", to: "permissions#set",
                          as: "set_permissions"
     end
   end
+
+  resources :files
+
+  get "/signin", to: "sessions#new"
+  post "/signin", to: "sessions#create"
+  delete "/signout", to: "sessions#destroy", as: "signout"
+end
 
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -79,4 +79,3 @@ Actiontracker::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end

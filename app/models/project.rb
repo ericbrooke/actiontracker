@@ -1,9 +1,9 @@
 class Project < ActiveRecord::Base
-	has_many :actions, dependent: :destroy
 	
-  validates :name, presence: true
+  has_many :actions, dependent: :destroy
+	has_many :permissions, as: :thing
 
-  has_many :permissions, as: :thing
+  validates :name, presence: true
 
   scope :viewable_by, ->(user) do
   	joins(:permissions).where(permissions: {action: "view", user_id: user.id })

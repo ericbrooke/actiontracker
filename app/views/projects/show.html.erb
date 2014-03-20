@@ -2,23 +2,23 @@
 
 <h2><%= @project.name %></h2>
 
-<% admins_only do %>
-	<%= link_to "Edit Project", edit_project_path(@project) %>
-	<%= link_to "Delete Project", 
-	      project_path(@project), 
-	      method: :delete, 
-	      data: { confirm: "You sure?"} %>
-<% end %>
+<ul id='actions'>
+  <% @project.actions.each do |action| %>
+    <li>
+      # <%= action.id %> -
+      <%= link_to action.title, [@project, action] %>
+   </li>
+  <% end %>
+ </ul>
 
 <% authorized?(:"create actions", @project) do %>
   <%= link_to "New Action", new_project_action_path(@project) %>
 <% end %>
 
-<ul id='actions'>
-  <% @project.actions.each do |action| %>
-  <li>
-    # <%= action.id %> -
-    <%= link_to action.title, [@project, action] %>
-   </li>
-   <% end %>
- </ul>
+<% admins_only do %>
+  <%= link_to "Edit Project", edit_project_path(@project) %>
+  <%= link_to "Delete Project", 
+        project_path(@project), 
+        method: :delete, 
+        data: { confirm: "You sure?"} %>
+<% end %>

@@ -44,8 +44,6 @@ before_action :authorize_delete!, only: :destroy
   	redirect_to @project
   end
 
-
-
 private
 
   def action_params

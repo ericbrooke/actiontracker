@@ -36,6 +36,7 @@ before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   def destroy
     @project.destroy
+    
     flash[:notice] = "Project has been destroyed."
     redirect_to projects_path
   end
